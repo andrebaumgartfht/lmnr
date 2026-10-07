@@ -125,14 +125,17 @@ services:
       quickwit:
         condition: service_healthy
     environment:
-      PORT: 5667
-      BACKEND_URL: http://app-server:8000
-      BACKEND_RT_URL: http://app-server:8002
+      PORT: ${PORT:-5667}
+      # BACKEND_URL usage depends on laminar transparency — if laminar frontend proxies to app-server, keep as is
+      BACKEND_URL: ${BACKEND_URL:-http://app-server:8000}
+      BACKEND_RT_URL: ${BACKEND_RT_URL:-http://app-server:8002}
+      # Check Coolify UI for these secrets — do not commit in git!
       SHARED_SECRET_TOKEN: ${SHARED_SECRET_TOKEN}
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-      NEXTAUTH_URL: http://localhost:5667
-      NEXTAUTH_SECRET: some_secret
-      NEXT_PUBLIC_URL: http://localhost:5667
+      NEXT_PUBLIC_URL: ${NEXT_PUBLIC_URL} 
+      # NEXTAUTH_URL = use laminar API path if laminar handles auth
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://laminar:8080/nextauth/token}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
       ENVIRONMENT: FULL
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_USER: ${CLICKHOUSE_USER}

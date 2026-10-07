@@ -127,8 +127,8 @@ services:
     environment:
       PORT: ${PORT:-5667}
       # BACKEND_URL usage depends on laminar transparency — if laminar frontend proxies to app-server, keep as is
-      BACKEND_URL: ${BACKEND_URL:-http://app-server:8000}
-      BACKEND_RT_URL: ${BACKEND_RT_URL:-http://app-server:8002}
+      BACKEND_URL: ${BACKEND_URL:-http://app-server:8800}
+      BACKEND_RT_URL: ${BACKEND_RT_URL:-http://app-server:8802}
       # Check Coolify UI for these secrets — do not commit in git!
       SHARED_SECRET_TOKEN: ${SHARED_SECRET_TOKEN}
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}

@@ -83,9 +83,9 @@ services:
     image: ghcr.io/lmnr-ai/app-server
     pull_policy: always
     ports:
-      - "${APP_SERVER_HOST_PORT:-8000}:8000"
-      - "${APP_SERVER_GRPC_HOST_PORT:-8001}:8001"
-      - "${APP_SERVER_RT_HOST_PORT:-8002}:8002"
+      - "${APP_SERVER_HOST_PORT:-8800}:8000"
+      - "${APP_SERVER_GRPC_HOST_PORT:-8801}:8001"
+      - "${APP_SERVER_RT_HOST_PORT:-8802}:8002"
     depends_on:
       postgres:
         condition: service_healthy
@@ -96,8 +96,8 @@ services:
       quickwit:
         condition: service_healthy
     environment:
-      PORT: 8000
-      GRPC_PORT: 8001
+      PORT: 8800
+      GRPC_PORT: 8801
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       RABBITMQ_URL: amqp://${RABBITMQ_DEFAULT_USER}:${RABBITMQ_DEFAULT_PASS}@rabbitmq:5672/%2f
       CLICKHOUSE_URL: http://clickhouse:8123
